@@ -246,6 +246,13 @@ Abort a jump by "cutting it short". This will reduce the vertical speed by some 
 * `reduction` (number) - Amount to multiply vertical velocity with
 
 
+### instance.set_enable(bool)
+Enable or disable collision detection.
+
+**PARAMETERS**
+* `state` (boolean) - True to enable collision detection
+
+
 ### instance.abort_wall_slide()
 Abort a slide down a wall (could be used when releasing the pushing control key)
 

@@ -125,6 +125,7 @@ function M.create(config)
 		rays = {},
 		down_rays = {},
 		parent_id = nil,
+		enabled = true
 	}
 
 	-- movement based on user input
@@ -183,7 +184,7 @@ function M.create(config)
 			-- down-hill
 			if state.slope_right then
 				movement.y = -velocity * math.abs(state.slope_right.y)
-			-- up-hill
+				-- up-hill
 			elseif state.slope_left then
 				movement.y = -velocity * math.abs(state.slope_left.y)
 				movement.x = -velocity * math.abs(state.slope_left.x)
@@ -207,7 +208,7 @@ function M.create(config)
 			if state.slope_right then
 				movement.y = -velocity * math.abs(state.slope_right.y)
 				movement.x = velocity * math.abs(state.slope_right.x)
-			-- down-hill
+				-- down-hill
 			elseif state.slope_left then
 				movement.y = -velocity * math.abs(state.slope_left.y)
 			end
@@ -284,6 +285,12 @@ function M.create(config)
 		if jumping_up() then
 			platypus.velocity.y = platypus.velocity.y * (reduction or 0.5)
 		end
+	end
+
+	--- enable/disable collision detection
+	-- @param state (default true)
+	function platypus.set_enable(state)
+		state.enabled = state
 	end
 
 	--- Check if this object is jumping
@@ -460,8 +467,13 @@ function M.create(config)
 		state.position = position
 		state.world_position = world_position
 		local origin = world_position + distance + platypus.collisions.offset
-		local offset = handle_collisions(origin)
-		go.set_position(position + distance + offset)
+
+		if state.enabled then
+			local offset = handle_collisions(origin)
+			go.set_position(position + distance + offset)
+		else
+			go.set_position(position + distance)
+		end
 
 		-- falling?
 		local previous_falling = state.falling
