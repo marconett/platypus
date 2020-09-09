@@ -288,9 +288,9 @@ function M.create(config)
 	end
 
 	--- enable/disable collision detection
-	-- @param state (default true)
-	function platypus.set_enable(state)
-		state.enabled = state
+	-- @param bool (default true)
+	function platypus.set_enable(bool)
+		state.enabled = bool
 	end
 
 	--- Check if this object is jumping

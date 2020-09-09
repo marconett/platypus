@@ -250,7 +250,7 @@ Abort a jump by "cutting it short". This will reduce the vertical speed by some 
 Enable or disable collision detection.
 
 **PARAMETERS**
-* `state` (boolean) - True to enable collision detection
+* `bool` (boolean) - True to enable collision detection
 
 
 ### instance.abort_wall_slide()
